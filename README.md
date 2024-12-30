@@ -29,7 +29,7 @@ To set up this project, follow these steps:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/weed-detection.git
+    git clone https://github.com/AiWAmanuel/weed-detection-model123.git
     cd weed-detection
     ```
 
