@@ -1,121 +1,110 @@
-# Weed Detection and Removal Using CNN
+1. Overview:
 
-## Overview
-This project aims to develop a machine learning model that can automatically identify weeds in agricultural fields. The model uses a Convolutional Neural Network (CNN) for image classification, distinguishing between crops and weeds in images of agricultural fields. The goal is to provide an automated system that helps farmers reduce pesticide use and manage weeds efficiently, ultimately improving crop yields.
+Purpose of the Project: This section explains the goal of the project. The Weed Detection and Removal system is designed to use machine learning, specifically Convolutional Neural Networks (CNNs), to automatically distinguish between crops and weeds in agricultural fields. The model will help in identifying and classifying weeds, which is critical for automated weed management systems in precision agriculture. This could help reduce the need for harmful pesticides and improve crop yields by targeting only the weeds.
 
+Approach: The system will use image classification techniques, where the model is trained on a labeled dataset of images that contain both weeds and crops. Once trained, the model will predict whether a given image contains a weed or a crop.
 
+2. Group Members:
+This section credits the individuals involved in the project, giving their names and ensuring that each person’s contribution is acknowledged.
 
-## Group Members
-- **Aman Reshid     Ugr/22667/13**
-- **Amanuel Mergia  UGR/22530/13**
-- **Ebisa Bette     Ugr/22643/13**
-- **Desalegn Sisay  Ugr/23232/13**
+Group 3 Members:
+Aman Reshid
+Amanuel Mergia
+Ebisa Bette
+Desalegn Sisay
+Each member likely contributed to different aspects of the project, such as coding, research, dataset preparation, or model evaluation.
 
+3. Requirements:
+This section lists all the libraries or tools needed to run the project. It helps users set up the environment and install the necessary dependencies.
 
+Python Libraries:
 
-## Requirements
-The following libraries are required to run this project:
+tensorflow: The deep learning framework used to build and train the CNN model.
+numpy: For handling arrays and mathematical operations on images.
+opencv-python: Used for image processing tasks like loading, resizing, and normalizing the images.
+matplotlib: For visualizations like plotting the training and validation accuracy over time.
+scikit-learn: For machine learning utilities such as label encoding.
+Tools:
 
-- `tensorflow`: Deep learning framework used for building and training the CNN model.
-- `numpy`: For handling arrays and mathematical operations on images.
-- `opencv-python`: For image processing tasks such as resizing, normalizing, and loading images.
-- `matplotlib`: Used for visualizing training progress (e.g., loss and accuracy graphs).
-- `scikit-learn`: For machine learning utilities such as label encoding.
+Git: To clone the repository from GitHub.
+Python 3.x: Ensure you are using a compatible Python version (usually Python 3.6 or higher).
+4. Installation Instructions:
+This section explains how to get the project up and running on a local machine.
 
+Step-by-step Instructions:
 
+Clone the project repository:
+bash
+Copy code
+git clone https://github.com/your-username/weed-detection.git
+cd weed-detection
+Install the necessary dependencies:
+bash
+Copy code
+pip install -r requirements.txt
+This command will install all the libraries listed in the requirements.txt file.
+Ensure that you have the correct Python version installed and the required libraries. If you're working in a virtual environment, activate it before installing the dependencies.
+5. Dataset:
+Dataset Description:
 
-## Installation Instructions
-To set up this project, follow these steps:
+The dataset for this project contains images of weeds and crops. The images are used to train the CNN model for classification.
+Each image should be labeled correctly (either as "weed" or "crop"). It’s assumed that the images are already pre-labeled and saved into different directories based on their classes.
+Dataset Structure:
 
-1. **Clone the repository**:
-    ```bash
-    git clone https://github.com/AiWAmanuel/weed-detection-model123.git
-    cd weed-detection
-    ```
+Organize the dataset into the following structure:
+lua
+Copy code
+train/
+  |-- weed/
+  |-- crop/
+The train/weed/ directory contains images of weeds, and the train/crop/ directory contains images of crops.
+Optionally, a separate test_images/ directory can be created for testing the model later on.
+Where to Get the Dataset:
 
-2. **Create and activate a virtual environment** (optional but recommended):
-    ```bash
-    python -m venv venv
-    source venv/bin/activate   # On Windows use 'venv\Scripts\activate'
-    ```
+Provide a link to the dataset or instructions on how to obtain it (e.g., from Kaggle, a university resource, or a dataset you’ve collected).
+6. Model Architecture:
+CNN Architecture:
+The model uses a Convolutional Neural Network (CNN) to classify the images. The architecture involves:
+Convolutional Layers: These layers help the model learn features such as edges, textures, and shapes from the images. We use Conv2D layers.
+MaxPooling Layers: These layers reduce the dimensionality of the feature maps while preserving important information.
+Flattening Layer: This converts the 2D matrices from convolution layers into 1D vectors that can be processed by fully connected layers.
+Dense Layers: Fully connected layers are used to make the final classification decision based on learned features.
+Dropout: Used to prevent overfitting by randomly setting a fraction of the input units to 0 during training.
+Softmax Output Layer: This layer converts the final outputs into probabilities, allowing for multi-class classification (weed or crop).
+Key Hyperparameters:
+Input Size: The model takes images resized to 224x224 pixels as input.
+Optimizer: Adam optimizer is used for faster convergence.
+Loss Function: Sparse categorical cross-entropy is used since the model is handling a multi-class classification problem.
+7. Training the Model:
+This section describes how to train the CNN model on the dataset.
 
-3. **Install dependencies**:
-    ```bash
-    pip install -r requirements.txt
-    ```
+Steps:
 
-Ensure you have Python 3.6+ installed. If you are using a virtual environment, make sure it is activated before running the above commands.
+Load the dataset into the script using the preprocess_images function.
+Split the dataset into training and validation sets.
+Train the CNN model on the images using the model.fit() method.
+Track the model’s training progress and adjust hyperparameters (such as batch size, number of epochs) as needed.
+After training, save the model using model.save() so that it can be used for predictions later on.
+Command to Train:
 
-
-
-## Dataset
-The dataset contains images of weeds and crops, which are used to train the model for classification. 
-
-
-Each subfolder should contain images for that respective class. Optionally, you can also create a separate `test_images/` folder for evaluating the model after training.
-
-
-
-
-### Dataset Source
-You can find the dataset [https://www.kaggle.com/datasets/jaidalmotra/weed-detection/code]
-
-
-## Model Architecture
-The model is built using a Convolutional Neural Network (CNN) with the following architecture:
-
-- **Input Layer**: The images are resized to 224x224x3 pixels for input.
-- **Conv2D Layers**: Convolutional layers that extract features like edges and textures from the images.
-- **MaxPooling Layers**: These layers reduce the dimensionality of the feature maps while preserving essential information.
-- **Flatten Layer**: Converts the feature maps into a 1D vector.
-- **Dense Layers**: Fully connected layers to make classification decisions.
-- **Dropout Layer**: Prevents overfitting by randomly setting some of the input units to 0 during training.
-- **Softmax Output Layer**: Converts the model's output into probabilities for multi-class classification (weed or crop).
-
-
-
-### Hyperparameters:
-- **Input Size**: 224x224 pixels
-- **Optimizer**: Adam
-- **Loss Function**: Sparse categorical cross-entropy
-- **Metrics**: Accuracy
-
-
-
-## Training the Model
-To train the model, follow these steps:
-
-1. **Prepare the dataset**: Organize the images into the `train/weed/` and `train/crop/` directories.
-2. **Run the training script**:
-    ```bash
-    python train_model.py
-    ```
-3. **Monitor the training**: The script will print the training and validation accuracy and loss over the epochs. You can also visualize these metrics using `matplotlib`.
-
-Once training is complete, the model will be saved in the `saved_model/` directory.
-
-
-
-## Testing the Model
-After training the model, you can test it on new images to evaluate its performance. To do so:
-
-1. Place your test images in the `test_images/` directory.
-2. Run the testing script:
-    ```bash
-    python test_model.py --images_path test_images/
-    ```
-
-This will output predictions indicating whether the image contains a weed or a crop.
-
-
-
-## Model Evaluation
-The model’s performance can be evaluated using various metrics such as:
-
-- **Accuracy**: The proportion of correctly classified images.
-- **Confusion Matrix**: A matrix showing the true positives, false positives, true negatives, and false negatives.
-- **Loss and Accuracy Graphs**: Visualize the model's training progress by plotting the loss and accuracy metrics.
-
-For evaluating the model, you can use the following command after training:
-```bash
-python evaluate_model.py
+bash
+Copy code
+python train_model.py
+8. Testing the Model:
+Testing Instructions:
+Once the model is trained, you can use the test_model.py script to evaluate it on new images.
+Place your test images in the test_images/ folder.
+Run the following command:
+bash
+Copy code
+python test_model.py --images_path test_images/
+This script will load the trained model and use it to predict whether the images in the test_images/ folder contain weeds or crops.
+9. Model Evaluation:
+Performance Metrics:
+The performance of the model is typically evaluated using metrics like:
+Accuracy: The overall proportion of correctly classified images.
+Confusion Matrix: Shows the true positives, false positives, true negatives, and false negatives.
+Loss and Accuracy Graphs: These can be plotted during training to monitor the model’s progress.
+Evaluating with New Images:
+After training, evaluate the model on new, unseen images. This gives an indication of how well the model generalizes to real-world data.
+Plot graphs of loss and accuracy to monitor overfitting or underfitting.
